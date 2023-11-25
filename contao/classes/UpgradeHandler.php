@@ -17,8 +17,9 @@
 /**
  * Run in a custom namespace, so the class can be replaced
  */
-namespace delahaye\googlemaps;
+namespace Respinar\ContaoGooglemapsBundle;
 
+use Contao\Database;
 
 /**
  * Class UpgradeHandler
@@ -33,7 +34,7 @@ class UpgradeHandler
 {
     public static function run()
     {
-        $objDatabase = \Database::getInstance();
+        $objDatabase = Database::getInstance();
 
         $strTable = 'tl_dlh_googlemaps_elements';
         $arrNames = array('overlaySRC', 'iconSRC', 'shadowSRC');
@@ -47,7 +48,7 @@ class UpgradeHandler
                 {
                     if ($arrField['name'] == $strName && $arrField['type'] != 'binary')
                     {
-                        \Database\Updater::convertSingleField($strTable, $strName);
+                        Database\Updater::convertSingleField($strTable, $strName);
                     }
                 }
             }
